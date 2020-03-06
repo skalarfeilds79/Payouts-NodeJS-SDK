@@ -1,0 +1,10 @@
+sudo: false
+language: node_js
+node_js:
+  - "10.0"
+  - "12.0"
+  - "stable"
+before_install:
+  - npm install -g grunt-cli
+script:
+  - PAYPAL_CLIENT_ID=AdV4d6nLHabWLyemrw4BKdO9LjcnioNIOgoz7vD611ObbDUL0kJQfzrdhXEBwnH8QmV-7XZjvjRWn0kg PAYPAL_CLIENT_SECRET=EPKoPC_haZMTq5uM9WXuzoxUVdgzVqHyD5avCyVC1NCIUJeVaNNUZMnzduYIqrdw-carG9LBAizFGMyK npm test
