@@ -99,7 +99,7 @@ Pass the batchId from the previous sample to retrieve Payouts batch details
 ### Code to Execute:
 ```javascript
 let getPayouts =  async function(batchId) {
-    request = new paypal.payouts.PayoutsGetRequest(batch);
+    request = new paypal.payouts.PayoutsGetRequest(batchId);
     request.page(1);
     request.pageSize(10);
     request.totalRequired(true);
