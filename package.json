@@ -11,6 +11,10 @@
   "homepage": "https://github.com/paypal/Payouts-NodeJS-SDK#readme",
   "author": "dl-paypal-payouts-sdk@paypal.com (https://developer.paypal.com/)",
   "main": "index",
+  "files": [
+    "lib",
+    "index.js"
+  ],
   "directories": {
     "lib": "./lib"
   },
