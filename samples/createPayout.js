@@ -80,7 +80,6 @@ async function createPayout(debug = false) {
     const response = await payPalClient.client().execute(request);
     if (debug) {
       console.log("Status Code: " + response.statusCode);
-      console.log("Status: " + response.result.status);
       console.log("Payout Batch ID: " + response.result.batch_header.payout_batch_id);
       console.log("Payout Batch Status: " + response.result.batch_header.batch_status);
       console.log("Links: ");

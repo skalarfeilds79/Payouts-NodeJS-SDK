@@ -32,7 +32,6 @@ async function getPayoutItem(itemId, debug = false) {
         const response = await payPalClient.client().execute(request);
         if (debug) {
             console.log("Status Code: " + response.statusCode);
-            console.log("Status: " + response.result.status);
             console.log("Payout Item ID: " + response.result.payout_item_id);
             console.log("Payout Item Status: " + response.result.transaction_status);
             console.log("Links: ");
