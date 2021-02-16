@@ -132,8 +132,10 @@ async function createPayoutFailure(debug = false) {
  * a Payout Batch.
  */
 if (require.main === module) {
-  (async () => await createPayout(true))();
-  (async () => await createPayoutFailure(true))();
+  (async () => {
+    await createPayout(true)
+    await createPayoutFailure(true)
+  })();
 }
 
 /**
