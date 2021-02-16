@@ -1,4 +1,5 @@
 const createPayout = require('./createPayout').createPayout;
+const createPayoutFailure = require('./createPayout').createPayoutFailure;
 const getPayout = require('./getPayout').getPayout;
 const getPayoutItem = require('./getPayoutItem').getPayoutItem;
 const cancelPayoutItem = require('./cancelPayoutItem').cancelPayoutItem;
@@ -32,9 +33,13 @@ function sleep(ms) {
                     if (checkPayoutComplete.result.batch_header.batch_status === "SUCCESS") {
                         //Cancel UNCLAIMED payout item
                         console.log("Cancelling unclaimed payout item for id - " + payoutItemId);
-                        let cancelResponse = await cancelPayoutItem(payoutItemId);
+                        let cancelResponse = await cancelPayoutItem(payoutItemId, true);
                         if (getItemResponse.statusCode === 200) {
                             console.log("Unclaimed payout item cancelled successfully for id - " + payoutItemId);
+
+                            //Run cancel failure scenario
+                            console.log("Simulate failure on cancelling an already cancelled Payout item with id: " + payoutItemId);
+                            await cancelPayoutItem(payoutItemId, true);
                         } else {
                             console.error("Failed to cancel unclaimed payout item for id - " + payoutItemId);
                         }
@@ -55,6 +60,14 @@ function sleep(ms) {
     } else {
         console.error("Failed to create payout");
     }
+
+    //Execute all failure cases
+    console.log("Create a payout with validation failure");
+    await createPayoutFailure(true)
+    console.log("Retrieving an invalid payout");
+    await getPayout("DUMMY", true)
+    console.log("Retrieving an invalid payout item");
+    await getPayoutItem("DUMMY", true)
 
     process.exit();
 

@@ -51,7 +51,16 @@ async function getPayout(batchId, debug = false) {
         return response;
     }
     catch (e) {
-        console.log(e)
+        if (e.statusCode) {
+            if (debug) {
+                console.log("Status code: ", e.statusCode);
+                const error = JSON.parse(e.message)
+                console.log("Failure response: ", error)
+                console.log("Headers: ", e.headers)
+            }
+        } else {
+            console.log(e)
+        }
     }
 }
 
@@ -63,6 +72,7 @@ if (require.main === module) {
     (async () => {
         let response = await createPayout();
         await getPayout(response.result.batch_header.payout_batch_id, true);
+        await getPayout("DUMMY", true);
     })();
 }
 
