@@ -37,7 +37,7 @@ let requestBody = {
       "email_subject": "This is a test transaction from SDK"
     },
     "items": [{
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -45,7 +45,7 @@ let requestBody = {
       "receiver": "payout-sdk-1@paypal.com",
       "sender_item_id": "Test_txn_1"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -53,7 +53,7 @@ let requestBody = {
       "receiver": "payout-sdk-2@paypal.com",
       "sender_item_id": "Test_txn_2"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -61,7 +61,7 @@ let requestBody = {
       "receiver": "payout-sdk-3@paypal.com",
       "sender_item_id": "Test_txn_3"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -69,7 +69,7 @@ let requestBody = {
       "receiver": "payout-sdk-4@paypal.com",
       "sender_item_id": "Test_txn_4"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -111,11 +111,11 @@ let requestBody = {
       "recipient_type": "EMAIL",
       "email_message": "SDK payouts test txn",
       "note": "Enjoy your Payout!!",
-      "sender_batch_id": "Test_sdk_1",
+      "sender_batch_id": "Test_sdk_fail",
       "email_subject": "This is a test transaction from SDK"
     },
     "items": [{
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
