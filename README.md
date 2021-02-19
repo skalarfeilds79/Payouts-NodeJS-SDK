@@ -137,14 +137,16 @@ let createPayouts  = async function(){
         console.log(`Response: ${JSON.stringify(response)}`);
         // If call returns body in response, you can get the deserialized version from the result attribute of the response.
         console.log(`Payouts Create Response: ${JSON.stringify(response.result)}`);
-    catch {
+    catch (e) {
       if (e.statusCode) {
+        //Handle server side/API failure response
         console.log("Status code: ", e.statusCode);
         // Parse failure response to get the reason for failure
         const error = JSON.parse(e.message)
         console.log("Failure response: ", error)
         console.log("Headers: ", e.headers)
       } else {
+        //Hanlde client side failure
         console.log(e)
       }
     }
