@@ -103,7 +103,7 @@ async function createPayout(debug = false) {
 
 /**
  * This function is used to create a Payouts Batch(POST - /v1/payments/payouts)
- * A maximum of 15000 payout items are supported in a single batch request
+ * with validation failure
  * @param {boolean} debug - prints debug logs with details on response 
  */
 async function createPayoutFailure(debug = false) {
