@@ -37,7 +37,7 @@ let requestBody = {
       "email_subject": "This is a test transaction from SDK"
     },
     "items": [{
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -45,7 +45,7 @@ let requestBody = {
       "receiver": "payout-sdk-1@paypal.com",
       "sender_item_id": "Test_txn_1"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -53,7 +53,7 @@ let requestBody = {
       "receiver": "payout-sdk-2@paypal.com",
       "sender_item_id": "Test_txn_2"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -61,7 +61,7 @@ let requestBody = {
       "receiver": "payout-sdk-3@paypal.com",
       "sender_item_id": "Test_txn_3"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -69,7 +69,7 @@ let requestBody = {
       "receiver": "payout-sdk-4@paypal.com",
       "sender_item_id": "Test_txn_4"
     }, {
-      "note": "Your 5$ Payout!",
+      "note": "Your 1$ Payout!",
       "amount": {
         "currency": "USD",
         "value": "1.00"
@@ -89,7 +89,67 @@ let createPayouts  = async function(){
         let response = await client.execute(request);
         console.log(`Response: ${JSON.stringify(response)}`);
         // If call returns body in response, you can get the deserialized version from the result attribute of the response.
-       console.log(`Payouts Create Response: ${JSON.stringify(response.result)}`);
+        console.log(`Payouts Create Response: ${JSON.stringify(response.result)}`);
+}
+createPayouts();
+```
+
+### Handle API Failure
+This will create a Payout with validation failure to showcase how to parse the failed response entity. Refer samples for more scenarios
+#### Code to Execute:
+```javascript
+const paypal = require('@paypal/payouts-sdk');
+  
+// Creating an environment
+let clientId = "<<PAYPAL-CLIENT-ID>>";
+let clientSecret = "<<PAYPAL-CLIENT-SECRET>>";
+let environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
+let client = new paypal.core.PayPalHttpClient(environment);
+
+let requestBody = {
+    "sender_batch_header": {
+      "recipient_type": "EMAIL",
+      "email_message": "SDK payouts test txn",
+      "note": "Enjoy your Payout!!",
+      "sender_batch_id": "Test_sdk_fail",
+      "email_subject": "This is a test transaction from SDK"
+    },
+    "items": [{
+      "note": "Your 1$ Payout!",
+      "amount": {
+        "currency": "USD",
+        "value": "1.00"
+      },
+      "receiver": "payout-sdk-1@paypal.com",
+      "sender_item_id": "Test_txn_1"
+    }]
+  }
+
+// Construct a request object and set desired parameters
+// Here, PayoutsPostRequest() creates a POST request to /v1/payments/payouts
+let request = new paypal.payouts.PayoutsPostRequest();
+request.requestBody(requestBody);
+
+// Call API with your client and get a response for your call
+let createPayouts  = async function(){
+    try {
+        let response = await client.execute(request);
+        console.log(`Response: ${JSON.stringify(response)}`);
+        // If call returns body in response, you can get the deserialized version from the result attribute of the response.
+        console.log(`Payouts Create Response: ${JSON.stringify(response.result)}`);
+    catch (e) {
+      if (e.statusCode) {
+        //Handle server side/API failure response
+        console.log("Status code: ", e.statusCode);
+        // Parse failure response to get the reason for failure
+        const error = JSON.parse(e.message)
+        console.log("Failure response: ", error)
+        console.log("Headers: ", e.headers)
+      } else {
+        //Hanlde client side failure
+        console.log(e)
+      }
+    }
 }
 createPayouts();
 ```

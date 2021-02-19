@@ -24,7 +24,6 @@ async function cancelPayoutItem(itemId, debug = false) {
         const response = await payPalClient.client().execute(request);
         if (debug) {
             console.log("Status Code: " + response.statusCode);
-            console.log("Status: " + response.result.status);
             console.log("Payout Item ID: " + response.result.payout_item_id);
             console.log("Payout Item Status: " + response.result.transaction_status);
             console.log("Links: ");
@@ -41,7 +40,16 @@ async function cancelPayoutItem(itemId, debug = false) {
         return response;
     }
     catch (e) {
-        console.log(e)
+        if (e.statusCode) {
+            if (debug) {
+                console.log("Status code: ", e.statusCode);
+                const error = JSON.parse(e.message)
+                console.log("Failure response: ", error)
+                console.log("Headers: ", e.headers)
+            }
+        } else {
+            console.log(e)
+        }
     }
 }
 

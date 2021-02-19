@@ -32,7 +32,6 @@ async function getPayoutItem(itemId, debug = false) {
         const response = await payPalClient.client().execute(request);
         if (debug) {
             console.log("Status Code: " + response.statusCode);
-            console.log("Status: " + response.result.status);
             console.log("Payout Item ID: " + response.result.payout_item_id);
             console.log("Payout Item Status: " + response.result.transaction_status);
             console.log("Links: ");
@@ -49,7 +48,16 @@ async function getPayoutItem(itemId, debug = false) {
         return response;
     }
     catch (e) {
-        console.log(e)
+        if (e.statusCode) {
+            if (debug) {
+                console.log("Status code: ", e.statusCode);
+                const error = JSON.parse(e.message)
+                console.log("Failure response: ", error)
+                console.log("Headers: ", e.headers)
+            }
+        } else {
+            console.log(e)
+        }
     }
 }
 
@@ -60,8 +68,9 @@ async function getPayoutItem(itemId, debug = false) {
 if (require.main === module) {
     (async () => {
         let createResponse = await createPayout();
-        let getResponse = await getPayout(createResponse.result.batch_header.payout_batch_id, true);
-        await getPayoutItem(getResponse.result.items[0].payout_item_id);
+        let getResponse = await getPayout(createResponse.result.batch_header.payout_batch_id);
+        await getPayoutItem(getResponse.result.items[0].payout_item_id, true);
+        await getPayoutItem("DUMMY", true);
     })();
 }
 
