@@ -1,6 +1,6 @@
 {
   "name": "payouts-sdk-samples",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NodeJS SDK sample for PayPal Payouts APIs",
   "keywords": [],
   "homepage": "",
@@ -17,7 +17,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@paypal/payouts-sdk": "^1.1.0"
+    "@paypal/payouts-sdk": "^1.1.1"
   },
   "license": "MIT",
   "scripts": {
